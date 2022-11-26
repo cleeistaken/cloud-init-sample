@@ -16,7 +16,7 @@ users:
 %{ if data_disks_count > 0 }
 runcmd:
 %{ for i in range(0, data_disks_count) ~}
-  - mkdir -p /data${i}
+  - mkdir -p /mnt/data${i}
 %{ endfor ~}
 
 disk_setup:
@@ -37,6 +37,6 @@ fs_setup:
 mount_default_fields: [ None, None, "auto", "defaults,noatime,nofail", "0", "2" ]
 mounts:
 %{ for i in range(0, data_disks_count) ~}
-  - [LABEL=data${i}, /data${i}]
+  - [LABEL=data${i}, /mnt/data${i}]
 %{ endfor ~}
 %{ endif }
